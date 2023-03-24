@@ -16,23 +16,23 @@
 <ul>
   @foreach (Treat trt in Model["treats"])
   {
-    <li>@Html.ActionLink(@trt.Name, "Details", "Treats", new { id = @eng.TreatId})</li>
+    <li>@Html.ActionLink(@trt.Name, "Details", "Treats", new { id = @trt.TreatId})</li>
   }
 </ul>
 
-<h4>Machines</h4>
-@if (Model["machines"].Length == 0)
+<h4>Flavors</h4>
+@if (Model["flavors"].Length == 0)
 {
-  <p>No machines have been added yet!</p>
+  <p>No flavors have been added yet!</p>
 } 
 <ul>
-  @foreach (Machine machine in Model["machines"])
+  @foreach (Flavor flavor in Model["flavors"])
   {
-    <li>@Html.ActionLink(@machine.Description, "Details", "Machines", new { id = @machine.MachineId})</li>
+    <li>@Html.ActionLink(@flavor.Description, "Details", "Flavors", new { id = @flavor.FlavorId})</li>
   }
 </ul>
 
 <hr>
 
-<p>@Html.ActionLink("Manage machines", "Index", "Machines")</p> 
+<p>@Html.ActionLink("Manage flavors", "Index", "Flavors")</p> 
 <p>@Html.ActionLink("Manage treats", "Index", "Treats")</p>

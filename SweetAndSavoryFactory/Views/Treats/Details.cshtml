@@ -12,15 +12,15 @@
 
 @if(@Model.JoinEntities.Count == 0)
 {
-  <p>This treat does not contain any machine</p>
+  <p>This treat does not contain any Flavor</p>
 }
 else
 {
- <h4>Machines the Treat belongs to:</h4>
+ <h4>Flavors the Treat belongs to:</h4>
   <ul>
   @foreach(MachineEngineer join in Model.JoinEntities)
   {
-    <li>Machines: @join.Machine.Description</li>
+    <li>Flavors: @join.Flavor.Description</li>
     @using (Html.BeginForm("DeleteJoin", "Treats"))
     {
       @Html.Hidden("joinId", @join.MachineEngineerId)
@@ -32,6 +32,6 @@ else
 
 <p>@Html.ActionLink("Back to Treats", "Index")</p>
 <p>@Html.ActionLink("Edit Treats", "Edit", new { id = Model.TreatId })</p>
-<p>@Html.ActionLink("Add a Machine to Treat", "AddMachine", new { id = Model.TreatId })</p>
+<p>@Html.ActionLink("Add a Flavor to Treat", "AddFlavor", new { id = Model.TreatId })</p>
 <p>@Html.ActionLink("Delete Treat", "Delete", new { id = Model.TreatId })</p>
 <p>@Html.ActionLink("Add new Treat", "Create", "Treats")</p>

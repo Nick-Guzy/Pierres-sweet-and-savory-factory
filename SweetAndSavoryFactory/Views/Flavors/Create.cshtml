@@ -2,9 +2,9 @@
   Layout = "_Layout";
 }
 
-@model SweetAndSavoryFactory.Models.Machine
+@model SweetAndSavoryFactory.Models.Flavor
 
-<h4>Add a new machine</h4>
+<h4>Add a new Flavor</h4>
 
 <p>@Html.ValidationMessageFor(model => model.TreatId, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 <p>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
@@ -13,9 +13,9 @@
 {
   @Html.LabelFor(model => model.Description)
   @Html.TextBoxFor(model => model.Description)
-  @Html.LabelFor(model => model.MachineDetails)
-  @Html.TextBoxFor(model => model.MachineDetails)
+  @Html.LabelFor(model => model.FlavorDetails)
+  @Html.TextBoxFor(model => model.FlavorDetails)
 
-  <input type="submit" value="Add new machine" class="btn btn-default" />
+  <input type="submit" value="Add new Flavor" class="btn btn-default" />
 }
-<p>@Html.ActionLink("Show all machines", "Index")</p>
+<p>@Html.ActionLink("Show all Flavors", "Index")</p>

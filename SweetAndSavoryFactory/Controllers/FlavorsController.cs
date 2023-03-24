@@ -7,19 +7,19 @@ using System.Linq;
 
 namespace SweetAndSavoryFactory.Controllers
 {
-  public class MachinesController : Controller
+  public class FlavorsController : Controller
   {
     private readonly SweetAndSavoryFactoryContext _db;
 
-    public MachinesController(SweetAndSavoryFactoryContext db)
+    public FlavorsController(SweetAndSavoryFactoryContext db)
     {
       _db = db;
     }
 
     public ActionResult Index()
     {
-      List<Machine> model = _db.Machines
-                            .Include(machine => machine.Treat)
+      List<Flavor> model = _db.Flavors
+                            .Include(flavor => flavor.Treat)
                             .ToList();
       return View(model);
     }
@@ -31,16 +31,16 @@ namespace SweetAndSavoryFactory.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Machine machine)
+    public ActionResult Create(Flavor flavor)
     {
       if (!ModelState.IsValid)
       {
           ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name", "TreatDetails");
-          return View(machine);
+          return View(flavor);
       }
       else
       {
-        _db.Machines.Add(machine);
+        _db.Flavors.Add(flavor);
         _db.SaveChanges();
         return RedirectToAction("Index");
       }
@@ -48,63 +48,63 @@ namespace SweetAndSavoryFactory.Controllers
 
     public ActionResult Details(int id)
     {
-      Machine thisMachine = _db.Machines
-          .Include(machine => machine.Treat)
-          .Include(machine => machine.JoinEntities)
+      Flavor thisFlavor = _db.Flavors
+          .Include(flavor => flavor.Treat)
+          .Include(flavor => flavor.JoinEntities)
           .ThenInclude(join => join.Treat)
-          .FirstOrDefault(machine => machine.MachineId == id);
-      return View(thisMachine);
+          .FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
     }
 
     public ActionResult Edit(int id)
     {
-      Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
+      Flavor thisFlavor = _db.Flavor.FirstOrDefault(flavor => flavor.FlavorId == id);
       ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name", "TreatDetails");
-      return View(thisMachine);
+      return View(thisFlavor);
     }
 
     [HttpPost]
-    public ActionResult Edit(Machine machine)
+    public ActionResult Edit(Flavor flavor)
     {
-      _db.Machines.Update(machine);
+      _db.Flavors.Update(flavor);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult Delete(int id)
     {
-      Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
-      return View(thisMachine);
+      Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
+      return View(thisFlavor);
     }
 
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
-      _db.Machines.Remove(thisMachine);
+      Flavor thisFlavor = _db.Flavor.FirstOrDefault(flavor => flavor.FlavorId == id);
+      _db.Flavors.Remove(thisFlavor);
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
 
     public ActionResult AddTreat(int id)
     {
-      Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
+      Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
       ViewBag.TreatId = new SelectList(_db.Treats, "TreatrId", "Name", "TreatDetails");
-      return View(thisMachine);
+      return View(thisFlavor);
     }
 
     [HttpPost]
-    public ActionResult AddTreat(Machine machine, int treatId)
+    public ActionResult AddTreat(Flavor flavor, int treatId)
     {
       #nullable enable
-      MachineEngineer? joinEntity = _db.MachineEngineer.FirstOrDefault(join => (join.TreatId == treatId && join.MachineId == machine.MachineId));
+      MachineEngineer? joinEntity = _db.MachineEngineer.FirstOrDefault(join => (join.TreatId == treatId && join.Flavord == flavor.FlavorId));
       #nullable disable
-      if (joinEntity == null && engineerId != 0)
+      if (joinEntity == null && treatId != 0)
       {
-        _db.MachineEngineer.Add(new MachineEngineer() { TreatId = treatId, MachineId = machine.MachineId });
+        _db.MachineEngineer.Add(new MachineEngineer() { TreatId = treatId, FlavorId = flavor.FlavorId });
         _db.SaveChanges();
       }
-      return RedirectToAction("Details", new { id = machine.MachineId });
+      return RedirectToAction("Details", new { id = flavor.FlavorId });
     }   
 
     [HttpPost]

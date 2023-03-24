@@ -32,7 +32,7 @@ namespace SweetAndSavoryFactory.Controllers
     {
       if (!ModelState.IsValid)
       {
-          ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Name", "MachineDetails");
+          ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name", "FlavorDetails");
           return View(treat);
       }
       else
@@ -47,7 +47,7 @@ namespace SweetAndSavoryFactory.Controllers
     {
       Treat thisTreat = _db.Treats
         .Include(join => join.JoinEntities)
-        .ThenInclude(machine => machine.Machine)
+        .ThenInclude(flavor => flavor.Flavor)
         .FirstOrDefault(treat => treat.TreatId == id);
       return View(thisTreat);
     }
@@ -81,23 +81,23 @@ namespace SweetAndSavoryFactory.Controllers
       return RedirectToAction("Index");
     }
 
-     public ActionResult AddMachine(int id)
+     public ActionResult AddFlavor(int id)
     {
       Treat thisTreat = _db.Treats.FirstOrDefault(treat => treat.TreatId == id);
-      ViewBag.MachineId = new SelectList(_db.Machines, "MachineId", "Description", "MachineDetails");
+      ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Description", "FlavorDetails");
       return View(thisTreat);
     } 
 
 [HttpPost]
-public ActionResult AddMachine(Treat treat, int machineId)
+public ActionResult AddFlavor(Treat treat, int flavorId)
 {
   #nullable enable
-  MachineEngineer? joinEntity = _db.MachineEngineer.FirstOrDefault(join => (join.MachineId == machineId && join.TreatId == treat.TreatId));
+  MachineEngineer? joinEntity = _db.MachineEngineer.FirstOrDefault(join => (join.FlavorId == flavorId && join.TreatId == treat.TreatId));
   #nullable disable
-  if (joinEntity == null && machineId != 0)
+  if (joinEntity == null && flavorId != 0)
   {
     _db.MachineEngineer.Add(new MachineEngineer() {
-      MachineId = machineId, TreatId = treat.TreatId
+      FlavorId = flavorId, TreatId = treat.TreatId
     });
     _db.SaveChanges();
   }

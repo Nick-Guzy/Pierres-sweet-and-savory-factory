@@ -3,25 +3,25 @@
 }
 
 @using SweetAndSavoryFactory.Models
-@model SweetAndSavoryFactory.Models.Machine
+@model SweetAndSavoryFactory.Models.Flavor
 
-<h2>Machine Details</h2>
+<h2>Flavor Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description)</h3>  
 <h3>@Html.DisplayNameFor(model => model.Engineer): @Html.DisplayFor(model => model.Engineer.Name)</h3>
 
 @if(@Model.JoinEntities.Count == 0)
 {
-  <p>This machine does not have any treats yet!</p>
+  <p>This Flavor does not have any treats yet!</p>
 }
 else
 {
-  <h4>This machine has the following treats:</h4>
+  <h4>This Flavor has the following treats:</h4>
   <ul>
     @foreach(MachineEngineer join in Model.JoinEntities)
     {
       <li>Engineer: @join.Engineer.Name</li>
-      @using (Html.BeginForm("DeleteJoin", "Machines"))
+      @using (Html.BeginForm("DeleteJoin", "Flavors"))
       {
         @Html.Hidden("joinId", @join.MachineEngineerId)
         <input type="submit" value="Delete"/>
@@ -31,6 +31,6 @@ else
 }
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
-<p>@Html.ActionLink("Add Treat", "AddTreat", new { id = Model.MachineId })</p>
-<p>@Html.ActionLink("Edit Machine", "Edit", new { id = Model.MachineId })</p>
-<p>@Html.ActionLink("Delete Machine", "Delete", new { id = Model.MachineId })</p>
+<p>@Html.ActionLink("Add Treat", "AddTreat", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.FlavorId })</p>
+<p>@Html.ActionLink("Delete Flavor", "Delete", new { id = Model.FlavorId })</p>
