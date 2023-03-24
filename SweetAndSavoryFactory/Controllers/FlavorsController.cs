@@ -97,11 +97,11 @@ namespace SweetAndSavoryFactory.Controllers
     public ActionResult AddTreat(Flavor flavor, int treatId)
     {
       #nullable enable
-      MachineEngineer? joinEntity = _db.MachineEngineer.FirstOrDefault(join => (join.TreatId == treatId && join.Flavord == flavor.FlavorId));
+      FlavorTreat? joinEntity = _db.FlavorTreat.FirstOrDefault(join => (join.TreatId == treatId && join.Flavord == flavor.FlavorId));
       #nullable disable
       if (joinEntity == null && treatId != 0)
       {
-        _db.MachineEngineer.Add(new MachineEngineer() { TreatId = treatId, FlavorId = flavor.FlavorId });
+        _db.FlavorTreat.Add(new FlavorTreat() { TreatId = treatId, FlavorId = flavor.FlavorId });
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = flavor.FlavorId });
@@ -110,8 +110,8 @@ namespace SweetAndSavoryFactory.Controllers
     [HttpPost]
     public ActionResult DeleteJoin(int joinId)
     {
-      MachineEngineer joinEntry = _db.MachineEngineer.FirstOrDefault(entry => entry.MachineEngineerId == joinId);
-      _db.MachineEngineer.Remove(joinEntry);
+      FlavorTreat joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
+      _db.FlavorTreat.Remove(joinEntry);
       _db.SaveChanges();
       return RedirectToAction("Index");
     } 

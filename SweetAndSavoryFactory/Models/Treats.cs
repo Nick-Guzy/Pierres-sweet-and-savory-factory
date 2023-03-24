@@ -10,6 +10,6 @@ namespace SweetAndSavoryFactory.Models
     public string Name { get; set; }
     public string TreatDetails { get; set; }
     
-    public List<MachineEngineer> JoinEntities { get; }
+    public List<FlavorTreat> JoinEntities { get; }
   }
 }

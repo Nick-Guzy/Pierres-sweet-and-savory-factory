@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SweetAndSavoryFactory.Models
 {
-  public class Machine
+  public class Flavor
   {
-    public int MachineId { get; set; }
-    [Required(ErrorMessage = "The Machine's description can't be empty!")]
+    public int FlavorId { get; set; }
+    [Required(ErrorMessage = "The Flavor's description can't be empty!")]
     public string Description { get; set; }
-    public string MachineDetails { get; set; }
+    public string FlavorDetails { get; set; }
     public Treat Treat { get; set; }
-    public List<MachineEngineer> JoinEntities { get; }
+    public List<FlavorTreat> JoinEntities { get; }
   }
 }
