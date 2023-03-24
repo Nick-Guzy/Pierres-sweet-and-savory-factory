@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SweetAndSavoryFactory.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace SweetAndSavoryFactory
 {
@@ -14,7 +15,7 @@ namespace SweetAndSavoryFactory
 
       builder.Services.AddControllersWithViews();
 
-      builder.Services.AddDbContext<FactoryContext>(
+      builder.Services.AddDbContext<SweetAndSavoryFactoryContext>(
                         dbContextOptions => dbContextOptions
                           .UseMySql(
                             builder.Configuration["ConnectionStrings:DefaultConnection"], ServerVersion.AutoDetect(builder.Configuration["ConnectionStrings:DefaultConnection"]
@@ -22,13 +23,19 @@ namespace SweetAndSavoryFactory
                         )
                       );
 
+        builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+        .AddEntityFrameworkStores<SweetAndSavoryContext>()
+        .AddDefaultTokenProviders();
+
       WebApplication app = builder.Build();
 
-      // app.UseDeveloperExceptionPage();
+      app.UseDeveloperExceptionPage();
       app.UseHttpsRedirection();
       app.UseStaticFiles();
 
       app.UseRouting();
+      app.UseAthentication();
+      app.UseAuthoprization();
 
       app.MapControllerRoute(
           name: "default",
