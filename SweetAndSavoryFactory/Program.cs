@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Factory.Models;
+using SweetAndSavoryFactory.Models;
 
-namespace Factory
+namespace SweetAndSavoryFactory
 {
   class Program
   {

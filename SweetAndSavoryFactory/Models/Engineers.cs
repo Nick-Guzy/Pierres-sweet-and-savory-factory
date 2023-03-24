@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 
-namespace Factory.Models
+namespace SweetAndSavoryFactory.Models
 {
   public class Engineer
   {

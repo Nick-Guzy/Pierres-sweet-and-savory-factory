@@ -1,11 +1,11 @@
 # Project Name
-Dr. Silly String
+Pierre's Sweet and Savory Factory
 # Contributor name
 Nicholas Guzy
 # Description
-The application will represent a wepage to handle Dr. Silly String's database for machines, engineers, and which of each belong to each other. 
+This application will represent a webpage where users can see a list of treats from Pierre's factory. User's will be able to log in, create, update, and delete treats. The treats will have a many to many relationship between treats and flavors. 
 # Link to website
-https://github.com/NicksFed/Dr-Silly-String.git
+https://github.com/NicksFed/Pierres-sweet-and-savory-factory.git
 # Technologies used:
 * C#
 * .NET6
@@ -13,19 +13,18 @@ https://github.com/NicksFed/Dr-Silly-String.git
 * EF Core
 * Razor
 * ASP
+* Identity
 # Setup steps
 1. Clone this repo.
-2. Open your shell (e.g., Terminal or GitBash) and navigate to this project's production directory called "Dr-Silly-String". 
-4. Add Entity Framework Core packages: $ dotnet add package Microsoft.EntityFrameworkCore -v 6.0.0 
-                                       $ dotnet add package Pomelo.EntityFrameworkCore.MySql -v 6.0.0
-5. Create the file appsettings.json file in your project directory, configure it with the following code
+2. Open your shell (e.g., Terminal or GitBash) and navigate to this project's production directory called "SweetAndSavoryFactory".
+3. Create the file appsettings.json file in your project directory, configure it with the following code
 {
   "ConnectionStrings": {
     "DefaultConnection": "Server=localhost;Port=3306;database=[databasename];uid=[username];pwd=[password];"
   }
 } 
 and input the database name for [databasename], your username for [username], and password for [password]
-6. In the production directory run dotnet watch run to use the application
+4. In the production directory run dotnet watch run to use the application
 # Known bugs
 None
 # License information with copyright and date

@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
-using Factory.Models;
+using SweetAndSavoryFactory.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Factory.Controllers
+namespace SweetAndSavoryFactory.Controllers
 {
     public class HomeController : Controller
     {
-      private readonly FactoryContext _db;
+      private readonly SweetAndSavoryFactoryContext _db;
 
-      public HomeController(FactoryContext db)
+      public HomeController(SweetAndSavoryFactoryContext db)
       {
         _db = db;
       }

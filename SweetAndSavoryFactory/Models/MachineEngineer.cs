@@ -1,4 +1,4 @@
-namespace Factory.Models
+namespace SweetAndSavoryFactory.Models
 {
   public class MachineEngineer
     {       

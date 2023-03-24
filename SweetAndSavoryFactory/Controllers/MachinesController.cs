@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
-using Factory.Models;
+using SweetAndSavoryFactory.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Factory.Controllers
+namespace SweetAndSavoryFactory.Controllers
 {
   public class MachinesController : Controller
   {
-    private readonly FactoryContext _db;
+    private readonly SweetAndSavoryFactoryContext _db;
 
-    public MachinesController(FactoryContext db)
+    public MachinesController(SweetAndSavoryFactoryContext db)
     {
       _db = db;
     }
