@@ -19,14 +19,14 @@ namespace SweetAndSavoryFactory.Controllers
     public ActionResult Index()
     {
       List<Machine> model = _db.Machines
-                            .Include(machine => machine.Engineer)
+                            .Include(machine => machine.Treat)
                             .ToList();
       return View(model);
     }
 
     public ActionResult Create()
     {
-      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name", "EngineerDetails");
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name", "TreatDetails");
       return View();
     }
 
@@ -35,7 +35,7 @@ namespace SweetAndSavoryFactory.Controllers
     {
       if (!ModelState.IsValid)
       {
-          ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name", "EngineerDetails");
+          ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name", "TreatDetails");
           return View(machine);
       }
       else
@@ -49,9 +49,9 @@ namespace SweetAndSavoryFactory.Controllers
     public ActionResult Details(int id)
     {
       Machine thisMachine = _db.Machines
-          .Include(machine => machine.Engineer)
+          .Include(machine => machine.Treat)
           .Include(machine => machine.JoinEntities)
-          .ThenInclude(join => join.Engineer)
+          .ThenInclude(join => join.Treat)
           .FirstOrDefault(machine => machine.MachineId == id);
       return View(thisMachine);
     }
@@ -59,7 +59,7 @@ namespace SweetAndSavoryFactory.Controllers
     public ActionResult Edit(int id)
     {
       Machine thisMachine = _db.Machines.FirstOrDefault(machine => machine.MachineId == id);
-      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name", "EngineerDetails");
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name", "TreatDetails");
       return View(thisMachine);
     }
 
@@ -86,22 +86,22 @@ namespace SweetAndSavoryFactory.Controllers
       return RedirectToAction("Index");
     }
 
-    public ActionResult AddEngineer(int id)
+    public ActionResult AddTreat(int id)
     {
       Machine thisMachine = _db.Machines.FirstOrDefault(machines => machines.MachineId == id);
-      ViewBag.EngineerId = new SelectList(_db.Engineers, "EngineerId", "Name", "EngineerDetails");
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatrId", "Name", "TreatDetails");
       return View(thisMachine);
     }
 
     [HttpPost]
-    public ActionResult AddEngineer(Machine machine, int engineerId)
+    public ActionResult AddTreat(Machine machine, int treatId)
     {
       #nullable enable
-      MachineEngineer? joinEntity = _db.MachineEngineer.FirstOrDefault(join => (join.EngineerId == engineerId && join.MachineId == machine.MachineId));
+      MachineEngineer? joinEntity = _db.MachineEngineer.FirstOrDefault(join => (join.TreatId == treatId && join.MachineId == machine.MachineId));
       #nullable disable
       if (joinEntity == null && engineerId != 0)
       {
-        _db.MachineEngineer.Add(new MachineEngineer() { EngineerId = engineerId, MachineId = machine.MachineId });
+        _db.MachineEngineer.Add(new MachineEngineer() { TreatId = treatId, MachineId = machine.MachineId });
         _db.SaveChanges();
       }
       return RedirectToAction("Details", new { id = machine.MachineId });

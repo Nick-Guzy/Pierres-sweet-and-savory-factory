@@ -9,7 +9,7 @@ namespace SweetAndSavoryFactory.Models
     [Required(ErrorMessage = "The Machine's description can't be empty!")]
     public string Description { get; set; }
     public string MachineDetails { get; set; }
-    public Engineer Engineer { get; set; }
+    public Treat Treat { get; set; }
     public List<MachineEngineer> JoinEntities { get; }
   }
 }

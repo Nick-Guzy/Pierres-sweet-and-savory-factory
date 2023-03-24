@@ -4,15 +4,15 @@
 
 @model SweetAndSavoryFactory.Models.Engineer
 
-<h4>Add a new engineer</h4>
+<h4>Add a new treat</h4>
 <p>@Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 
 @using (Html.BeginForm())
 {
   @Html.LabelFor(model => model.Name)
   @Html.TextBoxFor(model => model.Name)
-  @Html.LabelFor(model => model.EnginieerDetails)
-  @Html.TextBoxFor(model => model.EnginieerDetails)
-  <input type="submit" value="Add new engineer" />
+  @Html.LabelFor(model => model.TreatDetails)
+  @Html.TextBoxFor(model => model.TreatDetails)
+  <input type="submit" value="Add new treat" />
 }
-<p>@Html.ActionLink("Show all engineer", "Index")</p>
+<p>@Html.ActionLink("Show all treats", "Index")</p>

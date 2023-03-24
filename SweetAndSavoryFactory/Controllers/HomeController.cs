@@ -17,10 +17,10 @@ namespace SweetAndSavoryFactory.Controllers
       [HttpGet("/")]
       public ActionResult Index()
       {
-        Engineer[] engineers = _db.Engineers.ToArray();
+        Treat[] treats = _db.Treats.ToArray();
         Machine[] machines = _db.Machines.ToArray();
         Dictionary<string,object[]> model = new Dictionary<string, object[]>();
-        model.Add("engineers", engineers);
+        model.Add("treats", treats);
         model.Add("machines", machines);
         return View(model);
       }

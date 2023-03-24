@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace SweetAndSavoryFactory.Models
 {
-  public class Engineer
+  public class Treat
   {
-    public int EngineerId { get; set; }
-    [Required(ErrorMessage = "The Engineer's name can't be empty!")]
+    public int TreatId { get; set; }
+    [Required(ErrorMessage = "The Treat's name can't be empty!")]
     public string Name { get; set; }
-    public string EnginieerDetails { get; set; }
+    public string TreatDetails { get; set; }
     
     public List<MachineEngineer> JoinEntities { get; }
   }

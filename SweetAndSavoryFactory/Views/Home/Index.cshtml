@@ -8,15 +8,15 @@
 
 <hr>
 
-<h4>Engineers</h4>
-@if (Model["engineers"].Length == 0)
+<h4>Treats</h4>
+@if (Model["treats"].Length == 0)
 {
-  <p>No engineers have been added yet!</p>
+  <p>No treats have been added yet!</p>
 } 
 <ul>
-  @foreach (Engineer eng in Model["engineers"])
+  @foreach (Treat trt in Model["treats"])
   {
-    <li>@Html.ActionLink(@eng.Name, "Details", "Engineers", new { id = @eng.EngineerId})</li>
+    <li>@Html.ActionLink(@trt.Name, "Details", "Treats", new { id = @eng.TreatId})</li>
   }
 </ul>
 
@@ -35,4 +35,4 @@
 <hr>
 
 <p>@Html.ActionLink("Manage machines", "Index", "Machines")</p> 
-<p>@Html.ActionLink("Manage engineers", "Index", "Engineers")</p>
+<p>@Html.ActionLink("Manage treats", "Index", "Treats")</p>
