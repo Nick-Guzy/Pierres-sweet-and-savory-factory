@@ -9,7 +9,7 @@ namespace SweetAndSavoryFactory.Models
     [Required(ErrorMessage = "The Treat's name can't be empty!")]
     public string Name { get; set; }
     public string TreatDetails { get; set; }
-    
+    public Flavor Flavor { get; set; }
     public List<FlavorTreat> JoinEntities { get; }
   }
 }
