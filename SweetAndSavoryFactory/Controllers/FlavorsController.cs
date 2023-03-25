@@ -26,7 +26,6 @@ namespace SweetAndSavoryFactory.Controllers
 
     public ActionResult Create()
     {
-      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name", "TreatDetails");
       return View();
     }
 
@@ -58,7 +57,7 @@ namespace SweetAndSavoryFactory.Controllers
 
     public ActionResult Edit(int id)
     {
-      Flavor thisFlavor = _db.Flavor.FirstOrDefault(flavor => flavor.FlavorId == id);
+      Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
       ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name", "TreatDetails");
       return View(thisFlavor);
     }
@@ -80,7 +79,7 @@ namespace SweetAndSavoryFactory.Controllers
     [HttpPost, ActionName("Delete")]
     public ActionResult DeleteConfirmed(int id)
     {
-      Flavor thisFlavor = _db.Flavor.FirstOrDefault(flavor => flavor.FlavorId == id);
+      Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavor => flavor.FlavorId == id);
       _db.Flavors.Remove(thisFlavor);
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -97,7 +96,7 @@ namespace SweetAndSavoryFactory.Controllers
     public ActionResult AddTreat(Flavor flavor, int treatId)
     {
       #nullable enable
-      FlavorTreat? joinEntity = _db.FlavorTreat.FirstOrDefault(join => (join.TreatId == treatId && join.Flavord == flavor.FlavorId));
+      FlavorTreat? joinEntity = _db.FlavorTreat.FirstOrDefault(join => (join.TreatId == treatId && join.FlavorId == flavor.FlavorId));
       #nullable disable
       if (joinEntity == null && treatId != 0)
       {

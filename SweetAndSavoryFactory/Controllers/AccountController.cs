@@ -53,12 +53,13 @@ namespace SweetAndSavoryFactory.Controllers
           return View(model);
         }
       }
+    }
 
         public ActionResult Login()
       {
         return View();
       }
-    }
+    
 
     [HttpPost]
       public async Task<ActionResult> Login(LoginViewModel model)
@@ -88,5 +89,6 @@ namespace SweetAndSavoryFactory.Controllers
           await _signInManager.SignOutAsync();
           return RedirectToAction("Index");
         }
-      }
-    }
+  }
+}
+    

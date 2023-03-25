@@ -24,7 +24,7 @@ namespace SweetAndSavoryFactory
                       );
 
         builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
-        .AddEntityFrameworkStores<SweetAndSavoryContext>()
+        .AddEntityFrameworkStores<SweetAndSavoryFactoryContext>()
         .AddDefaultTokenProviders();
 
       WebApplication app = builder.Build();
