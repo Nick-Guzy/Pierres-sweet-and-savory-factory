@@ -4,9 +4,12 @@ using SweetAndSavoryFactory.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace SweetAndSavoryFactory.Controllers
 {
+  [Authorize]
   public class TreatsController : Controller
   {
     private readonly SweetAndSavoryFactoryContext _db;

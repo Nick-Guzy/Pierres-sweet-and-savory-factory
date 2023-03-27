@@ -4,6 +4,8 @@
 
 @using SweetAndSavoryFactory.Models
 @model SweetAndSavoryFactory.Models.Flavor
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
 
 <h2>Flavor Details</h2>
 <hr />
@@ -31,6 +33,7 @@ else
 }
 
 <p>@Html.ActionLink("Back to list", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>
 <p>@Html.ActionLink("Add Treat", "AddTreat", new { id = Model.FlavorId })</p>
 <p>@Html.ActionLink("Edit Flavor", "Edit", new { id = Model.FlavorId })</p>
 <p>@Html.ActionLink("Delete Flavor", "Delete", new { id = Model.FlavorId })</p>

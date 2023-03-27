@@ -34,8 +34,8 @@ namespace SweetAndSavoryFactory
       app.UseStaticFiles();
 
       app.UseRouting();
-      app.UseAthentication();
-      app.UseAuthoprization();
+      app.UseAuthentication();
+      app.UseAuthorization();
 
       app.MapControllerRoute(
           name: "default",

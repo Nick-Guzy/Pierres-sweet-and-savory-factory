@@ -6,7 +6,6 @@
 
 <h4>Add a new Flavor</h4>
 
-@* <p>@Html.ValidationMessageFor(model => model.Treat.TreatId, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p> *@
 <p>@Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger", @style = "font-weight: 600;" })</p>
 
 @using (Html.BeginForm())
@@ -15,7 +14,7 @@
   @Html.TextBoxFor(model => model.Description)
   @Html.LabelFor(model => model.FlavorDetails)
   @Html.TextBoxFor(model => model.FlavorDetails)
-
-  <input type="submit" value="Add new Flavor" class="btn btn-default" />
+  <input type="submit" value="Add new Flavor" />
 }
 <p>@Html.ActionLink("Show all Flavors", "Index")</p>
+<p>@Html.ActionLink("Home", "Index", "Home")</p>

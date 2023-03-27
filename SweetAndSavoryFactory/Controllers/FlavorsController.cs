@@ -4,9 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using SweetAndSavoryFactory.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace SweetAndSavoryFactory.Controllers
 {
+  [Authorize]
   public class FlavorsController : Controller
   {
     private readonly SweetAndSavoryFactoryContext _db;
@@ -19,7 +22,7 @@ namespace SweetAndSavoryFactory.Controllers
     public ActionResult Index()
     {
       List<Flavor> model = _db.Flavors
-                            .Include(flavor => flavor.Treat)
+                            // .Include(flavor => flavor.Treat)
                             .ToList();
       return View(model);
     }
@@ -48,7 +51,7 @@ namespace SweetAndSavoryFactory.Controllers
     public ActionResult Details(int id)
     {
       Flavor thisFlavor = _db.Flavors
-          .Include(flavor => flavor.Treat)
+          // .Include(flavor => flavor.Treat)
           .Include(flavor => flavor.JoinEntities)
           .ThenInclude(join => join.Treat)
           .FirstOrDefault(flavor => flavor.FlavorId == id);

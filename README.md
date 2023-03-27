@@ -24,7 +24,9 @@ https://github.com/NicksFed/Pierres-sweet-and-savory-factory.git
   }
 } 
 and input the database name for [databasename], your username for [username], and password for [password]
-4. In the production directory run dotnet watch run to use the application
+4. In the production directory run dotnet ef migrations add Initial
+5. In the production directory run dotnet ef database update
+6. In the production directory run dotnet watch run to use the application
 # Known bugs
 None
 # License information with copyright and date

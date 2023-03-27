@@ -7,5 +7,6 @@ namespace SweetAndSavoryFactory.Models
         public Flavor Flavor { get; set; }
         public int TreatId { get; set; }
         public Treat Treat { get; set; }
+        public ApplicationUser User { get; set; }
     }
 }
