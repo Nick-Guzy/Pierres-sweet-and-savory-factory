@@ -11,8 +11,8 @@ using SweetAndSavoryFactory.Models;
 namespace SweetAndSavoryFactory.Migrations
 {
     [DbContext(typeof(SweetAndSavoryFactoryContext))]
-    [Migration("20230327051026_AddIdentityToControllerAndCRUD")]
-    partial class AddIdentityToControllerAndCRUD
+    [Migration("20230330002316_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

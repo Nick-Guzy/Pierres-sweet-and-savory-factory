@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SweetAndSavoryFactory.Migrations
 {
-    public partial class AddIdentity : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -224,9 +224,9 @@ namespace SweetAndSavoryFactory.Migrations
                 {
                     TreatId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    TreatDetails = table.Column<string>(type: "longtext", nullable: true)
+                    TreatDetails = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     FlavorId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<string>(type: "varchar(255)", nullable: true)

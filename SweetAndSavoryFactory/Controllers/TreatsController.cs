@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace SweetAndSavoryFactory.Controllers
 {
@@ -13,16 +15,26 @@ namespace SweetAndSavoryFactory.Controllers
   public class TreatsController : Controller
   {
     private readonly SweetAndSavoryFactoryContext _db;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public TreatsController(SweetAndSavoryFactoryContext db)
+    public TreatsController(UserManager<ApplicationUser> userManager, SweetAndSavoryFactoryContext db)
     {
+      _userManager = userManager;
       _db = db;
     }
 
-    public ActionResult Index()
+    public async Task<ActionResult> Index()
     {
-      List<Treat> model = _db.Treats.ToList();
-      return View(model);
+      string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+      ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+      List<Treat> userTreats = new List<Treat>();
+      if (currentUser != null)
+      {
+      userTreats = _db.Treats
+      .Where(entry => entry.User.Id == currentUser.Id)
+      .Include(treat => treat.Flavor).ToList();
+      }
+      return View(userTreats);
     }
 
     public ActionResult Create()
@@ -31,7 +43,7 @@ namespace SweetAndSavoryFactory.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Treat treat)
+    public async Task<ActionResult> Create(Treat treat, int FlavorId)
     {
       if (!ModelState.IsValid)
       {
@@ -40,6 +52,8 @@ namespace SweetAndSavoryFactory.Controllers
       }
       else
       {
+        string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
         _db.Treats.Add(treat);
         _db.SaveChanges();
         return RedirectToAction("Index");
