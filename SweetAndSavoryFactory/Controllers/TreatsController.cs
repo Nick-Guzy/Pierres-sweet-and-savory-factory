@@ -28,12 +28,9 @@ namespace SweetAndSavoryFactory.Controllers
       string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
       List<Treat> userTreats = new List<Treat>();
-      if (currentUser != null)
-      {
       userTreats = _db.Treats
       .Where(entry => entry.User.Id == currentUser.Id)
       .Include(treat => treat.Flavor).ToList();
-      }
       return View(userTreats);
     }
 
@@ -54,6 +51,7 @@ namespace SweetAndSavoryFactory.Controllers
       {
         string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+        treat.User = currentUser;
         _db.Treats.Add(treat);
         _db.SaveChanges();
         return RedirectToAction("Index");

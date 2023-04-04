@@ -21,52 +21,28 @@ namespace SweetAndSavoryFactory.Controllers
         _db = db;
       }
 
-      // [HttpGet("/")]
-      // public async Task<ActionResult> Index()
-      // {
-      //   Treat[] treats = _db.Treats.ToArray();
-      //   Flavor[] flavors = _db.Flavors.ToArray();
-      //   Dictionary<string,object[]> model = new Dictionary<string, object[]>();
-      //   // 
-      //   model.Add("treats", treats);
-      //   model.Add("flavors", flavors);
-      //   //
-      //   string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-      //   ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-      //   if (currentUser != null)
-      //   {
-      //     Treat[] treat = _db.Treats
-      //                 .Where(entry => entry.User.Id == currentUser.Id)
-      //                 .ToArray();
-      //     model.Add("treats", treats);
-      //     Flavor[] flavor = _db.Flavors
-      //                 .Where(entry => entry.User.Id == currentUser.Id)
-      //                 .ToArray();
-      //     model.Add("flavors", flavors);
-      //   }
-      //   return View(model);
-
-
       [HttpGet("/")]
       public async Task<ActionResult> Index()
       {
-        Treat[] treat = _db.Treats.ToArray();
-        Flavor[] flavors = _db.Flavors.ToArray();
-        Dictionary<string,object[]> model = new Dictionary<string, object[]>();
-        model.Add("treats", treat);
-        model.Add("flavors", flavors);
+        Dictionary<string,object[]> model = new     Dictionary<string, object[]>();
         string userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
         if (currentUser != null)
         {
           Treat[] treats = _db.Treats
-          .Where(entry => entry.User.Id == currentUser.Id).ToArray();
-          model.Add("treat", treat);
-          Flavor[] flavor = _db.Flavors
-          .Where(entry => entry.User.Id == currentUser.Id).ToArray();
-          model.Add("flavor", flavor);
+          .Where(entry => entry.User.Id == currentUser.Id)
+          .ToArray();
+          model.Add("treats", treats);
+          Flavor[] flavors = _db.Flavors
+          .Where(entry => entry.User.Id == currentUser.Id)
+          .ToArray();
+          model.Add("flavors", flavors);
+          return View(model);
         }
-        return View(model);
+        else
+        {
+          return RedirectToAction("Index");
+        }
       }
     }
 }

@@ -8,8 +8,8 @@
 
 <hr>
 
-@* @if (User.Identity.IsAuthenticated) *@
-
+@if (User.Identity.IsAuthenticated)
+{
 <h4>Treats for @User.Identity.Name</h4>
 @if (Model["treats"].Length == 0)
 {
@@ -21,12 +21,14 @@
     <li>@Html.ActionLink(@trt.Name, "Details", "Treats", new { id = @trt.TreatId})</li>
   }
 </ul>
-@* else
+}
+else
 {
   <h4>Treats</h4>
   <p>Please  @Html.ActionLink("log in", "LogIn", "Account") to view or manage your Treats.</p>
-} *@
+}
 
+@if (User.Identity.IsAuthenticated)
 {
 <h4>Flavors for @User.Identity.Name</h4>
 @if (Model["flavors"].Length == 0)
@@ -40,11 +42,12 @@
   }
 </ul>
 }
-@* else
+
+else
 {
   <h4>Flavors</h4>
   <p>Please @Html.ActionLink("log in", "LogIn", "Account") to view or manage your Flavors.</p>
-} *@
+}
 <hr>
 
 <p>@Html.ActionLink("Manage flavors", "Index", "Flavors")</p> 

@@ -27,14 +27,11 @@ namespace SweetAndSavoryFactory.Controllers
     {
       string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
       ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
-      List<Flavor> userFlavors = _db.Flavors.ToList();
-      if (currentUser != null)
-      {
-        userFlavors = _db.Flavors
+        List<Flavor> userFlavors = _db.Flavors
         .Where(entry => entry.User.Id == currentUser.Id)
-        .Include(flavor => flavor.JoinEntities).ToList();
-      }
-      return View(userFlavors);
+        .Include(flavor => flavor.JoinEntities)
+        .ToList();
+        return View(userFlavors);
     }
 
     public ActionResult Create()
@@ -54,6 +51,7 @@ namespace SweetAndSavoryFactory.Controllers
       {
         string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         ApplicationUser currentUser = await _userManager.FindByIdAsync(userId);
+        flavor.User = currentUser;
         _db.Flavors.Add(flavor);
         _db.SaveChanges();
         return RedirectToAction("Index");
@@ -63,7 +61,6 @@ namespace SweetAndSavoryFactory.Controllers
     public ActionResult Details(int id)
     {
       Flavor thisFlavor = _db.Flavors
-          // .Include(flavor => flavor.Treat)
           .Include(flavor => flavor.JoinEntities)
           .ThenInclude(join => join.Treat)
           .FirstOrDefault(flavor => flavor.FlavorId == id);
@@ -103,7 +100,7 @@ namespace SweetAndSavoryFactory.Controllers
     public ActionResult AddTreat(int id)
     {
       Flavor thisFlavor = _db.Flavors.FirstOrDefault(flavors => flavors.FlavorId == id);
-      ViewBag.TreatId = new SelectList(_db.Treats, "TreatrId", "Name", "TreatDetails");
+      ViewBag.TreatId = new SelectList(_db.Treats, "TreatId", "Name", "TreatDetails");
       return View(thisFlavor);
     }
 

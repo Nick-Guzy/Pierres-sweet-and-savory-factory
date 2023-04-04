@@ -10,13 +10,17 @@
 {
   <h3>No treats have been added yet!</h3>
 } 
-
+else
+@if (User.Identity.IsAuthenticated)
+{
 <ul>
   @foreach(Treat treat in Model)
   {
-    <li>@Html.ActionLink($"{treat.Name}", "Details", new { id = treat.TreatId }) | @treat.Flavor.Description</li>
+    <li>@Html.ActionLink($"{@treat.Name}", "Details", new { id = @treat.TreatId })</li>
   }
 </ul>
+}
+
 
 <p>@Html.ActionLink("Add new treat", "Create")</p>
 <p>@Html.ActionLink("Add new Flavor", "Create", "Flavors")</p>
